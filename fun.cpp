@@ -1,7 +1,8 @@
 ﻿/*
  * 文件名: fun.cpp
  * 作者: 邹术琦
- * 创建日期: 2024-04-11
+ * 创建日期: 2024-04-09 12:15:25
+ * 更新日期：2024-04-11 22:19:47
  * 描述: 这个文件包含了通过泰勒展开和二分查找方法得到的近似三角函数的函数（sin、cos、tan、arcsin、arccos、arctan）。
  */
 
@@ -54,7 +55,7 @@ double sin_approx_degrees(double degrees, int terms = 10)
         if (radians < (-PI)) radians += 2 * PI;
         else  radians -= 2 * PI;
     }
-    if ((radians > (-PI / 2)) || (radians < (PI / 2)))
+    if ((radians > (-PI / 2)) && (radians < (PI / 2)))
     {
         for (int n = 0; n < terms; ++n)
         {
@@ -95,7 +96,7 @@ double cos_approx_degrees(double degrees, int terms = 10)
         if (radians < (-PI)) radians += 2 * PI;
         else  radians -= 2 * PI;
     }
-    if ((radians > (-PI / 2)) || (radians < (PI / 2)))
+    if ((radians > (-PI / 2)) && (radians < (PI / 2)))
     {
         for (int n = 1; n < terms; ++n)
         {
