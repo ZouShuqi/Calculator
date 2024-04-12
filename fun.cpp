@@ -2,7 +2,7 @@
  * 文件名: fun.cpp
  * 作者: 邹术琦
  * 创建日期: 2024-04-09 12:15:25
- * 更新日期：2024-04-11 22:19:47
+ * 更新日期：2024-04-12 22:34:25
  * 描述: 这个文件包含了通过泰勒展开和二分查找方法得到的近似三角函数的函数（sin、cos、tan、arcsin、arccos、arctan）。
  */
 
@@ -46,7 +46,7 @@ double factorial(int n)
  * @param {int} terms: 泰勒级数的项数，默认为10
  * @return {double} sum: 得到近似的sin值
  */
-double sin_approx_degrees(double degrees, int terms = 10)
+double sin_approx_degrees(double degrees, int terms )
 {
     double radians = degrees * (PI / 180.0);
     double sum = 0.0;
@@ -73,11 +73,11 @@ double sin_approx_degrees(double degrees, int terms = 10)
     }
     else if (radians <= (-PI / 2))
     {
-        return -cos_approx_degrees((radians + (PI / 2)) * (180.0 / PI), 10);
+        return -cos_approx_degrees((radians + (PI / 2), terms) * (180.0 / PI), terms);
     }
     else
     {
-        return cos_approx_degrees((radians - (PI / 2)) * (180.0 / PI), 10);
+        return cos_approx_degrees((radians - (PI / 2), terms) * (180.0 / PI), terms);
     }
 }
 
@@ -87,7 +87,7 @@ double sin_approx_degrees(double degrees, int terms = 10)
  * @param {int} terms: 泰勒级数的项数，默认为10
  * @return {double} sum: 得到近似的cos值
  */
-double cos_approx_degrees(double degrees, int terms = 10)
+double cos_approx_degrees(double degrees, int terms )
 {
     double radians = degrees * (PI / 180.0);
     double sum = 1.0; // cos的第一项是1
@@ -114,11 +114,11 @@ double cos_approx_degrees(double degrees, int terms = 10)
     }
     else if (radians <= (-PI / 2))
     {
-        return sin_approx_degrees((radians + (PI / 2)) * (180.0 / PI), 10);
+        return sin_approx_degrees((radians + (PI / 2), terms) * (180.0 / PI), terms);
     }
     else
     {
-        return -sin_approx_degrees((radians - (PI / 2)) * (180.0 / PI), 10);
+        return -sin_approx_degrees((radians - (PI / 2), terms) * (180.0 / PI), terms);
     }
 
 }
@@ -140,14 +140,14 @@ double tan_approx(double degrees, int terms)
  * @param {double} accuracy: 计算精度，也是精度阈值，默认为1e-6
  * @return {double} mid: 得到近似的arcsin值
  */
-double arcsin_approx(double value, double accuracy = 1e-6) {
+double arcsin_approx(double value, double accuracy ) {
     double mid = 0;
     double low = -90;
     double high = 90;
     while (high - low > accuracy) 
     {
         mid = (low + high) / 2;
-        if (sin_approx_degrees(mid) < value)
+        if (sin_approx_degrees(mid, terms) < value)
             low = mid;
         else
             high = mid;
@@ -161,14 +161,14 @@ double arcsin_approx(double value, double accuracy = 1e-6) {
  * @param {double} accuracy: 计算精度，也是精度阈值，默认为1e-6
  * @return {double} mid: 得到近似的arccos值
  */
-double arccos_approx(double value, double accuracy = 1e-6) {
+double arccos_approx(double value, double accuracy ) {
     double mid = 0;
     double low = 0;
     double high = 360;
     while (high - low > accuracy) // 精度阈值
     {
         mid = (low + high) / 2;
-        if (cos_approx_degrees(mid) > value)
+        if (cos_approx_degrees(mid, terms) > value)
             low = mid;
         else
             high = mid;
@@ -190,7 +190,7 @@ double arctan_approx(double value, double accuracy)
     while (high - low > accuracy) 
     {
         mid = (low + high) / 2;
-        tan_mid = tan_approx(mid, 20); 
+        tan_mid = tan_approx(mid, terms);
 
         if (tan_mid < value)
         {
