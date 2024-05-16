@@ -41,7 +41,7 @@ def sin(x):
 def cos(x):
     return dll.cos_approx_degrees(x, 10)
 def tan(x):
-    return dll.tan_approx_degrees(x, 10)
+    return dll.tan_approx(x, 10)
 def asin(x):
     return dll.arccos_approx(x, 0.01)
 def acos(x):
